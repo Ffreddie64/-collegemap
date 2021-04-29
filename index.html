@@ -70,7 +70,7 @@
 	var pool = L.marker([51.129239,-2.732878]);
 	college.bindPopup("<img style='width:250px' src='cblock.jpg'/><br /><b>C Block</b><br>Strode College").openPopup();
 	pool.bindPopup("<b>Swimming Pool</b><br>Strode College").openPopup();	
-	//omnivore.csv('strode.csv').addTo(mymap);	
+	omnivore.csv('strode.csv');	
 	
 	//This show the brief outline of the college with a polygon
         mymap.on('zoomend', function (e) {
@@ -81,6 +81,14 @@
                 college.remove()
             }
         });
+        mymap.on('zoomend', function (e) {
+            console.log(mymap.getZoom());
+            if (mymap.getZoom() < 12) {
+                pool.remove();
+            } else {
+                pool.addTo(mymap)
+            }
+		
         mymap.on('zoomend', function (e) {
             console.log(mymap.getZoom());
             if (mymap.getZoom() < 12) {
