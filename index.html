@@ -57,45 +57,46 @@
         });	
 	
 
-	//var collegeview=L.marker([51.129936,-2.732770]).addTo(mymap);
-	//collegeview.bindPopup("<br /><b>Strode College</b>").openPopup();
-	
-	
+	var collegeview=L.marker([51.129936,-2.732770]).addTo(mymap);
+	collegeview.bindPopup("<br /><b>Strode College</b>").openPopup();
+		
+
 	//Markers for outside of college
         var marker = L.marker([51.14471, -2.69866]).addTo(mymap);
 	marker.bindPopup("<img style='width:250px' src='tor.jpg'/><br /><b>Glastonbury Tor</b>").openPopup();	
+
 	
 	//Markers for college locations
-	var college = L.marker([51.129852, -2.7334955]);
-	var pool = L.marker([51.129239,-2.732878]);
-	college.bindPopup("<img style='width:250px' src='cblock.jpg'/><br /><b>C Block</b><br>Strode College").openPopup();
-	pool.bindPopup("<b>Swimming Pool</b><br>Strode College").openPopup();	
-	omnivore.csv('strode.csv');	
-	
+	var collegeClose= omnivore.csv('strode.csv',{
+	    maxZoom: 18,
+	    minZoom: 15		      		      
+	}).addTo(mymap);
+
+
 	//This show the brief outline of the college with a polygon
-        mymap.on('zoomend', function (e) {
-            console.log(mymap.getZoom());
-            if (mymap.getZoom() <= 17) {
-                college.addTo(mymap);
-            } else {
-                college.remove()
-            }
-        });
-        mymap.on('zoomend', function (e) {
-            console.log(mymap.getZoom());
-            if (mymap.getZoom() < 12) {
-                pool.remove();
-            } else {
-                pool.addTo(mymap)
-            }
-		
-        mymap.on('zoomend', function (e) {
-            console.log(mymap.getZoom());
-            if (mymap.getZoom() < 12) {
-                pool.remove();
-            } else {
-                pool.addTo(mymap)
-            }
+//        mymap.on('zoomend', function (e) {
+//            console.log(mymap.getZoom());
+//            if (mymap.getZoom() <= 17) {
+//                college.addTo(mymap);
+//            } else {
+//                college.remove()
+//            }
+//        });
+//        mymap.on('zoomend', function (e) {
+//            console.log(mymap.getZoom());
+//            if (mymap.getZoom() < 12) {
+//                pool.remove();
+//            } else {
+//                pool.addTo(mymap)
+//            }
+//		
+//        mymap.on('zoomend', function (e) {
+//            console.log(mymap.getZoom());
+//            if (mymap.getZoom() < 12) {
+//                omnivore.remove();
+//            } else {
+//                omnivore.addTo(mymap)
+//            }
 
 
 	//Other features for using map
@@ -107,8 +108,7 @@
 	var overlayMaps = {
 	    "Surface": surface,
             "Glastonbury Tor": marker,
-	    "Swimming Pool": pool,
-	    "C Block": college
+	    "Zoomed Markers": collegeClose
 	};
         var baseMaps = {
            "OSM ": osm,
