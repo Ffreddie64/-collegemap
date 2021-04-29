@@ -2,7 +2,7 @@
 <html>
 <head>
 	
-	<title>My First Web Page</title>
+	<title>Strode College Map</title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,27 +64,37 @@
 	    attribution: 'LiDAR 1m DSM Environment Agency OGL &copy; Crown Copyright 2021'
         });	
 	
+	
 	L.control.mousePosition().addTo(mymap);
-
 	mymap.addControl(new L.Control.Fullscreen());
 	
+	#Overlay and map options
+        L.control.layers(baseMaps, overlayMaps).addTo(mymap);	
+	var overlayMaps = {
+	    "Surface": surface
+	};
+        var baseMaps = {
+           "OSM ": osm,
+           "Google": google
+        };
+	
+	
+	#var collegeview=L.marker([51.129936,-2.732770]).addTo(mymap);
+	#collegeview.bindPopup("<br /><b>Strode College</b>").openPopup();
+	
+	
+	#Markers for outside of college
         var marker = L.marker([51.14471, -2.69866]).addTo(mymap);
-	marker.bindPopup("<img style='width:250px' src='tor.jpg'/><br /><b>Glastonbury Tor</b>").openPopup();
+	marker.bindPopup("<img style='width:250px' src='tor.jpg'/><br /><b>Glastonbury Tor</b>").openPopup();	
 	
-	while(zoom<=19) {
-		var collegeview=L.marker([51.129936,-2.732770]).addTo(mymap);
-		collegeview.bindPopup("<br /><b>Strode College</b>").openPopup();
-	}
-	
-	while(zoom>19) {
+	#Markers for college lacations
 	var college = L.marker([51.129852, -2.7334955]).addTo(mymap);
 	var pool = L.marker([51.129239,-2.732878]).addTo(mymap);
 	college.bindPopup("<img style='width:250px' src='cblock.jpg'/><br /><b>C Block</b><br>Strode College").openPopup();
 	pool.bindPopup("<b>Swimming Pool</b><br>Strode College").openPopup();
-	}
+	omnivore.csv('strode.csv').addTo(mymap);
+	
+		
 </script>
-
-
-
 </body>
 </html>
