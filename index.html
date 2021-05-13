@@ -74,7 +74,9 @@
         });	
 	
 
-	var collegeview=L.marker([51.129936,-2.732770]).addTo(mymap);
+	var collegeview=L.marker([51.129936,-2.732770]){
+		maxZoom:15
+	}.addTo(mymap);
 	collegeview.bindPopup("<br /><b>Strode College</b>").openPopup();
 		
 
@@ -91,8 +93,6 @@
 	
 
 
-
-
 	//Other features for using map
 	L.control.mousePosition().addTo(mymap);
 	mymap.addControl(new L.Control.Fullscreen());
@@ -102,7 +102,7 @@
 	var overlayMaps = {
 	    "Surface": surface,
             "Glastonbury Tor": marker,
-	    "Zoomed Markers": collegeClose
+	    "Zoomed Markers": data+
 	};
         var baseMaps = {
            "OSM ": osm,
